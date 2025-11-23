@@ -1,0 +1,196 @@
+:host {
+  --brand-brown: #6D5A4F;
+  --mint: #33D1BF;
+  --chip-border: #E9EEF0;
+  --shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* Ensure the Ionic page root exists and header sits above content */
+.add-task-root { display:block; height:100%; }
+
+/* Keep header pinned at the top and above content */
+.add-task-header {
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+  --background: rgba(255,255,255,0.98);
+}
+
+/* Header button / icon fixes for Add Task */
+.add-task-header ion-buttons,
+.add-task-header ion-buttons ion-button {
+  /* ensure header buttons are small tappable squares */
+  --padding-start: 6px;
+  --padding-end: 6px;
+  min-width: 36px;
+  width: 36px;
+  height: 36px;
+  --border-radius: 8px;
+  --box-shadow: none;
+}
+
+/* Constrain the native button part */
+.add-task-header ion-button::part(native) {
+  min-width: 36px;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  box-shadow: none;
+}
+
+/* Back button sizing */
+.add-task-header ion-back-button::part(native) {
+  min-width: 36px;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+}
+.add-task-header ion-back-button::part(icon) {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+
+/* Make sure the inner icon is the correct visual size */
+.add-task-header ion-button ion-icon,
+.add-task-header ion-icon {
+  font-size: 18px !important;
+  line-height: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  display: inline-block;
+  vertical-align: middle;
+  color: inherit;
+}
+
+/* If any header button content is image-based, constrain it as well */
+.add-task-header ion-button img,
+.add-task-header ion-button .icon-img {
+  width: 18px !important;
+  height: 18px !important;
+  object-fit: contain;
+}
+
+/* Optional: slightly reduce toolbar button area so title is not pushed */
+.add-task-header ion-toolbar {
+  padding-inline: 6px; /* keep title centered space */
+  min-height: 56px;
+}
+
+/* Page title in normal flow (no absolute positioning) */
+.page-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  color: var(--brand-brown);
+  font-size: 18px;
+  margin: 0 auto;
+  text-align: center;
+  pointer-events: none; /* preserve button clickability */
+}
+
+/* Defensive: in case there are any overly-broad global rules, override dangerous sizes here */
+.add-task-header ion-button[fill="clear"] {
+  --padding-start: 6px;
+  --padding-end: 6px;
+  min-width: 36px;
+  height: 36px;
+}
+
+/* Page content */
+.add-task-page { --background: #fff; }
+.page-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: calc(env(safe-area-inset-top) + 18px) 18px calc(env(safe-area-inset-bottom) + 14px);
+  margin-top: 6px; /* small separation below header */
+}
+
+/* Fields */
+.field { margin-top: 18px; }
+.label {
+  display:block;
+  font-weight:700;
+  color: var(--brand-brown);
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+/* Inputs */
+.input-item {
+  --background: transparent;
+  border-radius: 10px;
+  border: 1px solid #EEF1F3;
+  padding: 8px 12px;
+  height: 48px;
+}
+ion-input, ion-textarea { font-size: 15px; }
+
+/* Textarea card */
+.textarea-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid #EEF1F3;
+  box-shadow: var(--shadow);
+}
+.textarea-card ion-textarea { min-height: 92px; font-size: 14px; color: #333; }
+
+/* Chips */
+.chips {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:6px;
+}
+.chip {
+  appearance:none;
+  border: 1px solid var(--chip-border);
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 18px;
+  font-weight: 600;
+  color: #2b2b2b;
+  cursor: pointer;
+  min-height:36px;
+}
+.chip.selected {
+  background: var(--mint);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 16px rgba(51,209,191,0.14);
+}
+
+/* Action row */
+.action-row {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-top: 18px;
+  align-items:center;
+  padding: 16px 0 8px;
+}
+.cancel-btn {
+  --border-color: #33D1BF;
+  --color: #33D1BF;
+  --background: #fff;
+  --border-radius: 999px;
+  height: 46px;
+  padding: 0 18px;
+  font-weight:700;
+}
+.save-btn {
+  --background: var(--mint);
+  --color: #fff;
+  --border-radius: 999px;
+  width: 160px;
+  height: 46px;
+  font-weight:700;
+}
+
+/* spacer */
+.grow-spacer { flex:1; }
+
+@media (min-width: 420px) {
+  .page-shell { padding-left: 36px; padding-right: 36px; }
+}

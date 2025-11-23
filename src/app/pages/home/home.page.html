@@ -1,0 +1,176 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="header-clear"></ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="home-content">
+  <div class="device-shell">
+    <div class="status-bar">
+      <span>{{ now | date:'HH:mm' }}</span>
+      <div class="status-icons">
+        <span class="status-icon"></span>
+        <span class="status-icon"></span>
+        <span class="status-icon larger"></span>
+      </div>
+    </div>
+
+  <div class="hero-card">
+    <div>
+      <h1>Good day, there!</h1>
+      <p>{{ now | date:'EEEE, MMMM d' }}</p>
+    </div>
+    </div>
+
+  <div class="feeling-container">
+    <p class="feeling-title">How are you feeling today?</p>
+    <div class="feeling-grid">
+      <button class="feel-card" [class.selected]="selectedFeeling === 'bad'" (click)="selectFeeling('bad')">
+        <img src="assets/icons/feel/bad.png" alt="Bad">
+        <span>Bad</span>
+      </button>
+      <button class="feel-card" [class.selected]="selectedFeeling === 'okay'" (click)="selectFeeling('okay')">
+        <img src="assets/icons/feel/okay.png" alt="Okay">
+        <span>Okay</span>
+      </button>
+      <button class="feel-card" [class.selected]="selectedFeeling === 'good'" (click)="selectFeeling('good')">
+        <img src="assets/icons/feel/good.png" alt="Good">
+        <span>Good</span>
+      </button>
+      <button class="feel-card" [class.selected]="selectedFeeling === 'great'" (click)="selectFeeling('great')">
+        <img src="assets/icons/feel/great.png" alt="Great">
+        <span>Great</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="progress-container">
+    <p class="progress-title">Today's Progress</p>
+    <div class="progress-block">
+      <div class="progress-row">
+        <p class="metric-title">Focus Time</p>
+        <span class="metric-end">Goal: 120 min</span>
+      </div>
+      <p class="metric-sub">{{ focusMinutes }} min</p>
+      <div class="meter">
+        <div class="meter-fill" [style.width.%]="getFocusProgress()"></div>
+      </div>
+    </div>
+
+    <div class="progress-block">
+      <div class="progress-row">
+        <p class="metric-title">Tasks Completed</p>
+        <span class="metric-end">Total: {{ totalTasks }}</span>
+      </div>
+      <p class="metric-sub">{{ tasksCompleted }}</p>
+      <div class="meter">
+        <div class="meter-fill" [style.width.%]="getTaskProgress()"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <ion-icon name="time-outline"></ion-icon>
+      <p class="stat-label">Minutes Focused</p>
+      <p class="stat-value">{{ focusMinutes }}</p>
+    </div>
+    <div class="stat-card">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      <p class="stat-label">Tasks Completed</p>
+      <p class="stat-value">{{ tasksCompleted }}</p>
+    </div>
+    <div class="stat-card">
+      <ion-icon name="stats-chart-outline"></ion-icon>
+      <p class="stat-label">Today's Task</p>
+      <p class="stat-value">{{ todaysTasks.length }}</p>
+    </div>
+  </div>
+
+  <div class="tasks-block">
+    <div class="tasks-header-row">
+      <h3 class="tasks-title">Today's Tasks</h3>
+      <button class="add-task-btn" (click)="addTask()">
+        <span class="plus">+</span>
+        <span>Add task</span>
+      </button>
+    </div>
+    <div *ngFor="let task of todaysTasks" class="task-pill" [class.completed]="task.completed" (click)="openTask(task)">
+      <div class="task-left">
+        <div class="check-box">
+          <input type="checkbox" [checked]="task.completed" (click)="$event.stopPropagation()" (change)="completeTask(task.id)">
+        </div>
+        <div class="task-body">
+          <div class="task-row">
+            <span class="task-name">{{ task.title }}</span>
+            <span class="dot"></span>
+          </div>
+          <div class="meta-row">
+            <span class="meta">
+              <ion-icon name="time-outline"></ion-icon>
+              {{ task.duration }} min
+            </span>
+            <span class="meta" *ngIf="task.dueTime">{{ task.dueTime }}</span>
+          </div>
+        </div>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="task-arrow"></ion-icon>
+    </div>
+    <p *ngIf="todaysTasks.length === 0" class="no-tasks">No tasks for today</p>
+  </div>
+
+  <div class="quick-links">
+    <button class="link-card" (click)="startPomodoro()">
+      <img src="assets/icons/home/clock-1.png" alt="Pomodoro">
+      <span>Pomodoro</span>
+    </button>
+    <button class="link-card" (click)="goToTasks()">
+      <img src="assets/icons/home/calendar.png" alt="All Tasks">
+      <span>All Tasks</span>
+    </button>
+    <button class="link-card" (click)="viewAnalytics()">
+      <img src="assets/icons/home/trending-up.png" alt="Stats">
+      <span>Stats</span>
+    </button>
+  </div>
+
+  <div class="weekly-card">
+    <div class="weekly-top">
+      <h4>Weekly Overview</h4>
+      <button class="view-more" (click)="viewAnalytics()">View More</button>
+    </div>
+    <div class="weekly-items">
+      <div class="weekly-item">
+        <div class="weekly-icon">
+          <img src="assets/icons/home/clock.png" alt="Focus Minutes">
+        </div>
+        <p class="weekly-value">{{ focusMinutes }}</p>
+        <p class="weekly-label">Focus Minutes</p>
+      </div>
+      <div class="weekly-item">
+        <div class="weekly-icon">
+          <img src="assets/icons/home/square-check-big.png" alt="Tasks Completed">
+        </div>
+        <p class="weekly-value">{{ tasksCompleted }}</p>
+        <p class="weekly-label">Tasks Completed</p>
+      </div>
+      <div class="weekly-item">
+        <div class="weekly-icon">
+          <img src="assets/icons/home/trending-up-1.png" alt="Productivity">
+        </div>
+        <p class="weekly-value">{{ getProductivity() }}%</p>
+        <p class="weekly-label">Productivity</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-card">
+    <div class="cta-icon">
+      <img src="assets/icons/lucide_sparkles.png" alt="Sparkles">
+    </div>
+    <h2>Ready to focus?</h2>
+    <p>Use the Pomodoro Technique to boost your productivity and focus.</p>
+    <ion-button expand="block" color="warning" (click)="startPomodoro()">
+      Start Pomodoro Session
+    </ion-button>
+  </div>
+  </div>
+</ion-content>

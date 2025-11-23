@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button class="back-btn" fill="clear" size="small" (click)="goBack()">
+        <img src="assets/icons/common/back.png" alt="Back">
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="profile-content">
+  <div class="page-shell">
+  <div class="status-bar">
+    <span>{{ now | date:'HH:mm' }}</span>
+    <div class="status-icons">
+      <span class="status-icon"></span>
+      <span class="status-icon"></span>
+      <span class="status-icon larger"></span>
+    </div>
+  </div>
+  <div class="hero">
+    <img class="avatar" src="assets/icons/profile/User-1.png" alt="Profile avatar">
+    <div class="identity">
+      <h2>John Mathew Ramoso</h2>
+      <p>@jhn_mthwww</p>
+    </div>
+    <ion-button fill="clear" size="small">
+      <img src="assets/icons/profile/Edit.png" alt="Edit">
+    </ion-button>
+  </div>
+
+  <div class="section" aria-label="Account">
+    <p class="section-title">ACCOUNT</p>
+    <div class="item">
+      <img src="assets/icons/profile/User-1.png" alt="Personal info">
+      <span>Personal Information</span>
+      <img class="arrow" src="assets/icons/profile/Forward.png" alt="">
+    </div>
+    <div class="item">
+      <img src="assets/icons/profile/Notification.png" alt="Notifications">
+      <span>Notifications</span>
+      <img class="arrow" src="assets/icons/profile/Forward.png" alt="">
+    </div>
+    <div class="item">
+      <img src="assets/icons/profile/Lock.png" alt="Privacy">
+      <span>Privacy Settings</span>
+      <img class="arrow" src="assets/icons/profile/Forward.png" alt="">
+    </div>
+  </div>
+
+  <div class="section" aria-label="Preferences">
+    <p class="section-title">PREFERENCES</p>
+    <div class="item">
+      <img src="assets/icons/profile/Clock.png" alt="Daily focus goal">
+      <span>Daily Focus Goal</span>
+      <img class="arrow" src="assets/icons/profile/Forward.png" alt="">
+    </div>
+    <div class="item">
+      <img src="assets/icons/profile/Alarm Clock.png" alt="Pomodoro setting">
+      <span>Pomodoro Setting</span>
+      <img class="arrow" src="assets/icons/profile/Forward.png" alt="">
+    </div>
+    <div class="item">
+      <img src="assets/icons/profile/Moon Symbol.png" alt="Dark mode">
+      <span>Dark Mode</span>
+      <img class="arrow" src="assets/icons/profile/Forward.png" alt="">
+    </div>
+  </div>
+
+  <div class="section" aria-label="Support">
+    <p class="section-title">SUPPORT</p>
+    <div class="item">
+      <img src="assets/icons/profile/Info.png" alt="Help">
+      <span>Help & Feedback</span>
+      <img class="arrow" src="assets/icons/profile/Forward.png" alt="">
+    </div>
+    <div class="item">
+      <img src="assets/icons/profile/Favorite.png" alt="Rate app">
+      <span>Rate the App</span>
+      <img class="arrow" src="assets/icons/profile/Forward.png" alt="">
+    </div>
+  </div>
+
+  <ion-button expand="block" class="logout-btn">LOG OUT</ion-button>
+  </div>
+</ion-content>
+
+<!-- Profile tab removed; footer omitted -->

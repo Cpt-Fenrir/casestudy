@@ -1,0 +1,250 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+ion-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.detail-content {
+  --background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 60%, #e7e7e7 100%);
+}
+
+.page-shell {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 4px 18px 20px 18px;
+  position: relative;
+}
+
+.clear-toolbar {
+  --background: #fff;
+  --border-width: 0;
+  --min-height: 48px;
+  --padding-start: 4px;
+  --padding-end: 4px;
+  box-shadow: none;
+}
+
+ion-toolbar {
+  display: flex;
+  align-items: center;
+  box-shadow: none;
+}
+
+.title-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toolbar-title {
+  font-weight: 800;
+  font-size: 18px;
+  color: #3c2b14;
+}
+
+.back-btn {
+  --padding-start: 0;
+  --padding-end: 0;
+  --background: transparent;
+  --box-shadow: none;
+  --border-radius: 0;
+  height: 32px;
+  min-height: 32px;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 6px 0 6px 0;
+}
+
+.title-row h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #3c2b14;
+}
+
+.title-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title-actions ion-button {
+  --padding-start: 6px;
+  --padding-end: 6px;
+  --background: transparent;
+  --border-width: 1px;
+  --border-color: #d5d5d5;
+  --border-radius: 6px;
+  height: 36px;
+  min-height: 36px;
+}
+
+.title-actions ion-button img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.complete-chip {
+  --background: #a01818 !important;
+  --color: #ffffff !important;
+  --border-radius: 999px;
+  --border-color: transparent;
+  --box-shadow: none;
+  font-weight: 700;
+  text-transform: none;
+  height: 34px;
+  padding: 0 16px;
+  margin: 0 0 16px 0;
+  align-self: flex-start;
+  letter-spacing: 0;
+  position: relative;
+  left: -14px;
+}
+
+.complete-chip::part(native) {
+  background: #a01818 !important;
+  color: #ffffff !important;
+  border-radius: 999px !important;
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 0 16px !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  box-shadow: none !important;
+}
+
+.complete-chip.completed {
+  --background: #1c9f4b !important;
+  --color: #ffffff !important;
+}
+
+.complete-chip.completed::part(native) {
+  background: #1c9f4b !important;
+  color: #ffffff !important;
+}
+
+.summary-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 14px 12px;
+  box-shadow: 0 12px 18px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 14px;
+  margin-top: 8px;
+}
+
+.summary-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.icon-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #f6f1eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-circle img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.summary-label {
+  margin: 0;
+  font-size: 12px;
+  color: #6f6f6f;
+  font-weight: 600;
+}
+
+.summary-value {
+  margin: 2px 0 0 0;
+  font-size: 14px;
+  font-weight: 800;
+  color: #3c2b14;
+}
+
+.summary-chip {
+  display: inline-block;
+  margin: 2px 0 0 0;
+  padding: 6px 12px;
+  background: #ffd7d7;
+  color: #b72b2b;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.summary-chip.danger {
+  background: #ffdddd;
+  color: #c73434;
+}
+
+.desc-card {
+  margin-top: 10px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+}
+
+.desc-title {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  font-weight: 800;
+  color: #3c2b14;
+}
+
+.desc-body {
+  margin: 0;
+  font-size: 13px;
+  color: #5a5a5a;
+  line-height: 1.5;
+}
+
+.pomodoro-btn::part(native) {
+  margin-top: 24px;
+  width: 100%;
+  --background: #31afa2 !important;
+  --color: #ffffff !important;
+  --border-radius: 16px;
+  --border-width: 0;
+  --box-shadow: none;
+  --border-color: transparent;
+  --padding-start: 22px;
+  --padding-end: 22px;
+  text-transform: none;
+  font-weight: 800;
+  height: 54px;
+  letter-spacing: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pomodoro-btn .play-icon {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  filter: brightness(0) invert(1);
+}

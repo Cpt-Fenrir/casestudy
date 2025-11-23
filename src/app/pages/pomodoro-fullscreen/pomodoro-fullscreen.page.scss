@@ -1,0 +1,45 @@
+.fs-page { --background:#fff; }
+.fs-top { display:flex; justify-content:space-between; align-items:center; padding:12px; }
+.fs-top ion-icon { font-size:22px; }
+.fs-icons ion-icon { margin-left:16px; }
+
+.fs-digits {
+  flex:1; height: 70vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:24px;
+  font-family:'Orbitron', monospace; color:#111;
+}
+.fs-digits .row { font-size:18vh; line-height:.8; }
+
+.fs-controls {
+  display:flex; justify-content:center; gap:12px; margin-bottom:28px;
+}
+.pill { width:64px; height:44px; --border-radius:12px; }
+.pill.danger { --background:#e25a54; --color:#fff; }
+
+ion-modal.sheet-modal{
+  --width: 100%;
+  --height: 100%;
+  --border-radius: 0;
+  --backdrop-opacity: 0.35;
+}
+ion-modal.sheet-modal::part(backdrop){
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(8px);
+}
+ion-modal.sheet-modal::part(content){
+  --background:transparent;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+}
+.sheet-card{
+  width:90vw; max-width:360px; background:#fff; border-radius:16px; padding:16px;
+  box-shadow:0 6px 24px rgba(0,0,0,.08);
+  margin:auto;
+}
+.sheet-title{ text-align:center; color:#6D5A4F; font-weight:700; margin:6px 0 10px; }
+.sheet-actions{ display:flex; justify-content:space-between; gap:12px; margin-top:12px; }
+.sheet-actions ion-button{ flex:1; --border-radius:10px; }

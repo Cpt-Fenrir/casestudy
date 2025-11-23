@@ -1,0 +1,73 @@
+<ion-header translucent class="add-task-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tasks" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="page-title">Add Task</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" size="small" (click)="confirmDelete()" aria-label="Delete task">
+        <ion-icon name="trash-outline" style="font-size:18px;width:18px;height:18px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="add-task-page add-task-root">
+  <form (ngSubmit)="saveTask()" #taskForm="ngForm" class="page-shell">
+
+    <!-- Task Title -->
+    <div class="field">
+      <label class="label">Task Title</label>
+      <ion-item lines="none" class="input-item">
+        <ion-input name="title" required [(ngModel)]="task.title" placeholder="What do you need to do?"></ion-input>
+      </ion-item>
+    </div>
+
+    <!-- Description -->
+    <div class="field">
+      <label class="label">Description (Optional)</label>
+      <div class="textarea-card">
+        <ion-textarea name="description" autoGrow="true" rows="3" [(ngModel)]="task.description" placeholder="Add details about this task"></ion-textarea>
+      </div>
+    </div>
+
+    <!-- Category -->
+    <div class="field">
+      <label class="label">Category</label>
+      <div class="chips">
+        <button type="button" *ngFor="let c of categories" class="chip" [class.selected]="task.category === c" (click)="selectCategory(c)">
+          {{ c }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Priority -->
+    <div class="field">
+      <label class="label">Priority</label>
+      <div class="chips">
+        <button type="button" class="chip" [class.selected]="task.priority === 'High'" (click)="selectPriority('High')">High</button>
+        <button type="button" class="chip" [class.selected]="task.priority === 'Medium'" (click)="selectPriority('Medium')">Medium</button>
+        <button type="button" class="chip" [class.selected]="task.priority === 'Low'" (click)="selectPriority('Low')">Low</button>
+      </div>
+    </div>
+
+    <!-- Estimated Time -->
+    <div class="field">
+      <label class="label">Estimated Time (minutes)</label>
+      <ion-item lines="none" class="input-item">
+        <ion-input type="number" name="estimated" [(ngModel)]="task.estimated" placeholder="20"></ion-input>
+      </ion-item>
+    </div>
+
+    <!-- Spacer to push actions to bottom -->
+    <div class="grow-spacer"></div>
+
+    <!-- Action Row -->
+    <div class="action-row">
+      <ion-button fill="outline" class="cancel-btn" (click)="cancel()">Cancel</ion-button>
+      <ion-button type="submit" class="save-btn" color="mint" [disabled]="!task.title">Save Task</ion-button>
+    </div>
+  </form>
+</ion-content>

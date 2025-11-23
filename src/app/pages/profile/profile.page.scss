@@ -1,0 +1,91 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+ion-content {
+  --background: var(--color-bg);
+  --padding-bottom: 120px;
+}
+
+.profile-content {
+  padding: 12px 0;
+}
+
+.hero {
+  background: #f7f7f7;
+  border: 1px solid #ededed;
+  border-radius: 14px;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  object-fit: cover;
+  border: 2px solid #e2e2e2;
+}
+
+.identity h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--color-text-primary);
+}
+
+.identity p {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.section {
+  border: 1px solid #ededed;
+  border-radius: 14px;
+  padding: 10px 10px 6px 10px;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  margin: 0 0 8px 0;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--color-text-secondary);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 6px;
+}
+
+.item span {
+  font-size: 13px;
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+.arrow {
+  width: 14px;
+  height: 14px;
+}
+
+.logout-btn {
+  margin: 14px 0 24px 0;
+  --background: var(--color-cta);
+  --color: #ffffff;
+  font-weight: 800;
+}
+
+.nav-icon {
+  height: 22px;
+}

@@ -1,0 +1,156 @@
+<ion-content [fullscreen]="true" class="analytics-page">
+  <div class="page-shell">
+    <!-- Eyebrow + Title -->
+    <div class="eyebrow">Analytics</div>
+    <h1 class="title">Your Statistics</h1>
+    <div class="subrow">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span>{{ monthLabel }}</span>
+    </div>
+
+    <!-- Range switch -->
+    <div class="range-tabs" role="tablist">
+      <button type="button" class="tab" [class.active]="range==='week'"  (click)="setRange('week')">Week</button>
+      <button type="button" class="tab" [class.active]="range==='month'" (click)="setRange('month')">Month</button>
+      <button type="button" class="tab" [class.active]="range==='year'"  (click)="setRange('year')">Year</button>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon"><ion-icon name="time-outline"></ion-icon></div>
+        <div class="stat-value">{{ focusMinutes }}</div>
+        <div class="stat-label">Focus Minutes</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><ion-icon name="checkmark-done-outline"></ion-icon></div>
+        <div class="stat-value">{{ tasksCompleted }}</div>
+        <div class="stat-label">Tasks Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><ion-icon name="trending-up-outline"></ion-icon></div>
+        <div class="stat-value">{{ productivity }}%</div>
+        <div class="stat-label">Productivity</div>
+      </div>
+    </div>
+
+    <!-- Focus Time -->
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Focus Time</h3>
+        <ion-icon name="time-outline"></ion-icon>
+      </div>
+      <div class="chart">
+        <div class="y-axis">
+          <span *ngFor="let t of ticks">{{ t }}</span>
+        </div>
+        <div class="bars">
+          <div class="bar-wrap" *ngFor="let v of focusData; let i=index">
+            <div class="bar mint" [style.height.%]="barHeight(v, focusMax)"></div>
+            <div class="x-label">{{ weekLabels[i] }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tasks Completed -->
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Tasks Completed</h3>
+        <ion-icon name="checkbox-outline"></ion-icon>
+      </div>
+      <div class="chart">
+        <div class="y-axis">
+          <span *ngFor="let t of ticks">{{ t }}</span>
+        </div>
+        <div class="bars">
+          <div class="bar-wrap" *ngFor="let v of tasksData; let i=index">
+            <div class="bar amber" [style.height.%]="barHeight(v, tasksMax)"></div>
+            <div class="x-label">{{ weekLabels[i] }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Task Categories -->
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Task Categories</h3>
+        <ion-icon name="list-outline"></ion-icon>
+      </div>
+
+      <div class="cat-row" *ngFor="let c of categories">
+        <div class="cat-left">
+          <span class="dot" [style.background]="categoryColors[c]"></span>
+          <span>{{ c }}</span>
+        </div>
+        <div class="cat-bar">
+          <div class="cat-fill" [style.background]="categoryColors[c]" [style.width.%]="categoryPct[c]"></div>
+        </div>
+        <div class="cat-pct">{{ categoryPct[c] }}%</div>
+      </div>
+    </div>
+
+    <!-- Mood Tracking -->
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Mood Tracking</h3>
+        <ion-icon name="happy-outline"></ion-icon>
+      </div>
+      <div class="mood-actions">
+        <button class="mood-btn bad" (click)="logMood('Bad')">Bad</button>
+        <button class="mood-btn okay" (click)="logMood('Okay')">Okay</button>
+        <button class="mood-btn good" (click)="logMood('Good')">Good</button>
+        <button class="mood-btn great" (click)="logMood('Great')">Great</button>
+      </div>
+
+      <div class="mood-tools">
+        <button class="text-btn" (click)="toggleMoodList()">{{ showMoods ? 'Hide' : 'Show' }} list</button>
+        <button class="text-btn danger" (click)="clearMoods()" [disabled]="!recentMoods.length">Clear</button>
+      </div>
+
+      <ng-container *ngIf="showMoods">
+        <ng-container *ngIf="recentMoods.length; else noMoods">
+          <div class="mood-list">
+            <div class="mood-row" *ngFor="let m of recentMoods">
+              <span class="pill" [class.bad]="m.mood==='Bad'" [class.okay]="m.mood==='Okay'" [class.good]="m.mood==='Good'" [class.great]="m.mood==='Great'">
+                {{ m.mood }}
+              </span>
+              <span class="date">{{ m.date }}</span>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #noMoods>
+          <div class="empty">No mood entries yet</div>
+        </ng-template>
+      </ng-container>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="bottom-nav">
+  <ion-toolbar>
+    <div class="nav-buttons">
+      <ion-button fill="clear" size="small" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <img class="nav-icon default" src="assets/icons/nav/Home_Outline.png" alt="Home">
+        <img class="nav-icon active" src="assets/icons/nav/Home_Solid.png" alt="Home active">
+        <span class="nav-label">Home</span>
+      </ion-button>
+      <ion-button fill="clear" size="small" routerLink="/tasks" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <img class="nav-icon default" src="assets/icons/nav/Checked_Checkbox_Outline.png" alt="Tasks">
+        <img class="nav-icon active" src="assets/icons/nav/Checked_Checkbox_Solid.png" alt="Tasks active">
+        <span class="nav-label">Tasks</span>
+      </ion-button>
+      <ion-button fill="clear" size="small" routerLink="/pomodoro" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <img class="nav-icon default" src="assets/icons/nav/Alarm_Clock_Outline.png" alt="Pomodoro">
+        <img class="nav-icon active" src="assets/icons/nav/Alarm_Clock_Solid.png" alt="Pomodoro active">
+        <span class="nav-label">Pomodoro</span>
+      </ion-button>
+      <ion-button fill="clear" size="small" routerLink="/analytics" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <img class="nav-icon default" src="assets/icons/nav/Statistics_Solid.png" alt="Analytics">
+        <img class="nav-icon active" src="assets/icons/nav/Statistics_Solid.png" alt="Analytics active">
+        <span class="nav-label">Analytics</span>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

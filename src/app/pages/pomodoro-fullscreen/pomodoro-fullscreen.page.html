@@ -1,0 +1,66 @@
+﻿<ion-content [fullscreen]="true" class="fs-page">
+  <div class="fs-top">
+    <ion-icon name="close-outline" (click)="close()"></ion-icon>
+    <div class="fs-icons">
+      <ion-icon [name]="muted ? 'volume-mute-outline' : 'volume-high-outline'" (click)="toggleMute()"></ion-icon>
+      <ion-icon name="timer-outline" (click)="openTimerMode()"></ion-icon>
+      <ion-icon name="settings-outline" (click)="openWhiteNoise()"></ion-icon>
+    </div>
+  </div>
+
+  <div class="fs-digits">
+    <div class="row">{{ (time$ | async)?.split(':')[0] }}</div>
+    <div class="row">{{ (time$ | async)?.split(':')[1] }}</div>
+  </div>
+
+  <div class="fs-controls">
+    <ion-button class="pill" (click)="toggle()">
+      <ion-icon [name]="running ? 'pause' : 'play'"></ion-icon>
+    </ion-button>
+    <ion-button class="pill danger" (click)="stop()">
+      <ion-icon name="stop"></ion-icon>
+    </ion-button>
+  </div>
+
+  <!-- reuse sheets -->
+  <ion-modal *ngIf="timerModeOpen" [isOpen]="true" (didDismiss)="timerModeOpen=false" cssClass="sheet-modal">
+    <ng-template>
+      <div class="sheet-card">
+        <div class="sheet-title">Timer Mode</div>
+        <ion-list lines="none">
+          <ion-item button detail="false" (click)="mode='down'">
+            <ion-label><h3>20:00 &rarr; 00:00</h3><p>Count down from 20:00 until the time is up.</p></ion-label>
+            <ion-icon slot="end" name="checkmark-outline" *ngIf="mode==='down'"></ion-icon>
+          </ion-item>
+          <ion-item button detail="false" (click)="mode='up'">
+            <ion-label><h3>00:00 &rarr; &infin;</h3><p>Start counting from 00:00 until manually stopped.</p></ion-label>
+            <ion-icon slot="end" name="checkmark-outline" *ngIf="mode==='up'"></ion-icon>
+          </ion-item>
+        </ion-list>
+        <div class="sheet-actions">
+          <ion-button fill="outline" (click)="timerModeOpen=false">Cancel</ion-button>
+          <ion-button color="mint" (click)="applyTimerMode()">Confirm</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal *ngIf="whiteNoiseOpen" [isOpen]="true" (didDismiss)="whiteNoiseOpen=false" cssClass="sheet-modal">
+    <ng-template>
+      <div class="sheet-card">
+        <div class="sheet-title">White Noise</div>
+        <ion-list lines="none">
+          <ion-radio-group [(ngModel)]="selectedNoise">
+            <ion-item *ngFor="let n of noiseOptions">
+              <ion-label>{{ n }}</ion-label>
+              <ion-radio slot="end" [value]="n"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+        <div class="sheet-actions">
+          <ion-button color="mint" (click)="whiteNoiseOpen=false">Confirm</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+</ion-content>

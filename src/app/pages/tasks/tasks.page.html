@@ -1,0 +1,74 @@
+<ion-content [fullscreen]="true" class="tasks-page">
+  <div class="page-shell">
+    <h1 class="title">Tasks</h1>
+
+    <!-- Category filter (pill segment) -->
+    <ion-segment class="pill-segment" [value]="selectedCategory" (ionChange)="onCategoryChange($event)">
+      <ion-segment-button *ngFor="let c of categories" [value]="c">
+        <ion-label>{{ c }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- Today’s Tasks header + Add -->
+    <div class="section-head">
+      <h2>Today’s Tasks</h2>
+      <ion-button class="add-btn" fill="outline" size="small" shape="round" (click)="addTask()">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        Add task
+      </ion-button>
+    </div>
+
+    <!-- Task list -->
+    <div class="tasks-list">
+      <div class="task-card"
+           *ngFor="let t of filteredTasks"
+           [class.done]="t.done"
+           [style.--accent]="t.accent"
+           (click)="openTask(t)">
+        <button class="check" (click)="toggleDone(t, $event)">
+          <ion-icon *ngIf="t.done" name="checkmark-outline"></ion-icon>
+        </button>
+
+        <div class="card-main">
+          <div class="card-title">{{ t.title }}</div>
+          <div class="card-meta">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>{{ t.duration }} min</span>
+            <span class="spacer"></span>
+            <span class="dot" [style.background]="t.dot"></span>
+            <span class="at">{{ t.time }}</span>
+          </div>
+        </div>
+
+        <ion-icon class="chev" name="chevron-forward-outline"></ion-icon>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="bottom-nav">
+  <ion-toolbar>
+    <div class="nav-buttons">
+      <ion-button fill="clear" size="small" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <img class="nav-icon default" src="assets/icons/nav/Home_Outline.png" alt="Home">
+        <img class="nav-icon active" src="assets/icons/nav/Home_Solid.png" alt="Home active">
+        <span class="nav-label">Home</span>
+      </ion-button>
+      <ion-button fill="clear" size="small" routerLink="/tasks" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <img class="nav-icon default" src="assets/icons/nav/Checked_Checkbox_Outline.png" alt="Tasks">
+        <img class="nav-icon active" src="assets/icons/nav/Checked_Checkbox_Solid.png" alt="Tasks active">
+        <span class="nav-label">Tasks</span>
+      </ion-button>
+      <ion-button fill="clear" size="small" routerLink="/pomodoro" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <img class="nav-icon default" src="assets/icons/nav/Alarm_Clock_Outline.png" alt="Pomodoro">
+        <img class="nav-icon active" src="assets/icons/nav/Alarm_Clock_Solid.png" alt="Pomodoro active">
+        <span class="nav-label">Pomodoro</span>
+      </ion-button>
+      <ion-button fill="clear" size="small" routerLink="/analytics" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <img class="nav-icon default" src="assets/icons/nav/Statistics_Solid.png" alt="Analytics">
+        <img class="nav-icon active" src="assets/icons/nav/Statistics_Solid.png" alt="Analytics active">
+        <span class="nav-label">Analytics</span>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

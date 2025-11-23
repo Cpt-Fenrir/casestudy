@@ -1,0 +1,149 @@
+:host {
+  --brand-brown: #6D5A4F;
+  --chip-blue: #4FA6FF;
+  --chip-blue-tint: rgba(79,166,255,.18);
+  --card-border: #F0CFA2;   /* warm thin border like the mock */
+  --text-muted: #6B7280;
+}
+
+.tasks-page {
+  --background: #fff;
+}
+
+.page-shell {
+  min-height: 100%;
+  padding: calc(env(safe-area-inset-top) + 20px) 16px 20px;
+}
+
+.title {
+  color: var(--brand-brown);
+  font-weight: 700;
+  font-size: 22px;
+  margin: 0 0 12px;
+}
+
+/* --- Pill segment (filters) --- */
+.pill-segment {
+  --background: transparent;
+  display: flex;
+  column-gap: 8px;
+  margin-bottom: 18px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.pill-segment ion-segment-button {
+  --color: #333;
+  --indicator-color: transparent;
+  height: 32px;
+  min-width: auto;
+  padding: 0 12px;
+  border-radius: 14px;
+  border: 1px solid #E7E7E9;
+  text-transform: none;
+  font-weight: 600;
+  background: #fff;
+}
+.pill-segment ion-segment-button.segment-button-checked {
+  color: #fff;
+  background: var(--chip-blue);
+  border-color: transparent;
+  box-shadow: 0 2px 6px var(--chip-blue-tint);
+}
+
+/* --- Section head --- */
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0 10px;
+}
+.section-head h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+.add-btn {
+  --border-color: #DADCE0;
+  --color: #111;
+  --background: #fff;
+  --border-radius: 12px;
+  height: 32px;
+  padding-inline: 10px;
+  text-transform: none;
+  font-weight: 600;
+}
+
+/* --- Task cards --- */
+.tasks-list {
+  display: grid;
+  row-gap: 12px;
+}
+
+.task-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px 1fr 20px;
+  align-items: center;
+  column-gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  background: #fff;
+}
+
+/* tiny colored dot (status) */
+.task-card .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* left checkbox */
+.check {
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid #D6D6D8;
+  border-radius: 6px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+.task-card.done .check {
+  background: var(--accent, #28C381);
+  border-color: transparent;
+}
+.check ion-icon { color: #fff; font-size: 16px; }
+
+/* title + meta */
+.card-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: #111;
+  margin-bottom: 6px;
+}
+.task-card.done .card-title {
+  color: #9CA3AF;
+  text-decoration: line-through;
+}
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+.card-meta ion-icon { font-size: 16px; }
+.card-meta .spacer { flex: 1; }
+.card-meta .at { min-width: 72px; text-align: right; }
+
+.chev { font-size: 18px; color: #BABEC4; }
+
+/* subtle hover/press */
+.task-card:active { transform: scale(.997); }
+
+/* iOS overscroll polish */
+.pill-segment::-webkit-scrollbar { display: none; }

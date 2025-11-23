@@ -1,0 +1,92 @@
+<ion-header>
+  <div class="status-bar header-status">
+    <span>{{ now | date:'HH:mm' }}</span>
+    <div class="status-icons">
+      <span class="status-icon"></span>
+      <span class="status-icon"></span>
+      <span class="status-icon larger"></span>
+    </div>
+  </div>
+  <ion-toolbar class="clear-toolbar">
+    <div class="toolbar-row title-strip">
+      <ion-button class="back-btn" fill="clear" size="small" (click)="goBack()">
+        <img src="assets/icons/common/back.png" alt="Back">
+      </ion-button>
+      <span class="toolbar-title">Task Details</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="detail-content">
+  <div class="page-shell" *ngIf="task">
+    <div class="title-row">
+      <h1>{{ task.title }}</h1>
+      <div class="title-actions">
+        <ion-button fill="clear" size="small" (click)="editTask()">
+          <img src="assets/icons/task-detail/edit.png" alt="Edit">
+        </ion-button>
+        <ion-button fill="clear" size="small" (click)="deleteTask()">
+          <img src="assets/icons/task-detail/trash.png" alt="Delete">
+        </ion-button>
+      </div>
+    </div>
+
+    <ion-button class="complete-chip" size="small" fill="solid" (click)="toggleComplete()" [class.completed]="task.completed">
+      {{ task.completed ? 'Completed' : 'Mark as Complete' }}
+    </ion-button>
+
+    <div class="summary-card">
+      <div class="summary-row">
+        <div class="icon-circle">
+          <img src="assets/icons/task-detail/clock.png" alt="Time">
+        </div>
+        <div>
+          <p class="summary-label">Estimated Time</p>
+          <p class="summary-value">{{ task.duration }} minutes</p>
+        </div>
+      </div>
+
+      <div class="summary-row">
+        <div class="icon-circle">
+          <img src="assets/icons/task-detail/calendar-30.png" alt="Date">
+        </div>
+        <div>
+          <p class="summary-label">Due Date</p>
+          <p class="summary-value">
+            {{ task.createdDate | date:'fullDate' }} <span *ngIf="task.dueTime">at {{ task.dueTime }}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="summary-row">
+        <div class="icon-circle">
+          <img src="assets/icons/task-detail/price-tag.png" alt="Category">
+        </div>
+        <div>
+          <p class="summary-label">Category</p>
+          <p class="summary-chip">{{ task.category }}</p>
+        </div>
+      </div>
+
+      <div class="summary-row">
+        <div class="icon-circle">
+          <img src="assets/icons/task-detail/priority.png" alt="Priority">
+        </div>
+        <div>
+          <p class="summary-label">Priority</p>
+          <p class="summary-chip danger">{{ task.priority || 'High' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="desc-card">
+      <p class="desc-title">Description</p>
+      <p class="desc-body">{{ task.description || 'No description yet.' }}</p>
+    </div>
+
+    <ion-button expand="block" class="pomodoro-btn" fill="solid" color="mint" (click)="startPomodoro()">
+      <img src="assets/icons/task-detail/play.png" alt="Start" class="play-icon">
+      Start Pomodoro
+    </ion-button>
+  </div>
+</ion-content>
